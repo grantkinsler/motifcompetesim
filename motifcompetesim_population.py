@@ -10,7 +10,7 @@ class Population:
 		self.nr_cells_with_motif = self.count_cells_with_motif()
 
 	def populate(self,numCells,motiflist,max_strand_nr):
-		for cell_iterator in range(numCells):
+		for cell_iterator in xrange(numCells):
 			self.cells.append(Cell([],[],motiflist,max_strand_nr,'empty','empty','empty'))
 
 	def update_counters(self):
@@ -21,7 +21,7 @@ class Population:
 	def count_motifs(self):
 		motif_count = [0] * len(self.motiflist)
 		for cell in self.cells:
-			for index in range(len(motif_count)):
+			for index in xrange(len(motif_count)):
 				motif_count[index] = motif_count[index] + cell.motif_count()[index]
 		return motif_count
 
@@ -34,7 +34,7 @@ class Population:
 	def count_cells_with_motif(self):
 		cell_count = [0] * len(self.motiflist)
 		for cell in self.cells:
-			for index in range(len(cell_count)):
+			for index in xrange(len(cell_count)):
 				if cell.has_motif[index] == True:
 					cell_count[index] += 1
 		return cell_count

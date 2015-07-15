@@ -3,7 +3,7 @@ from motifcompetesim_population import Population
 import random as rand
 from copy import deepcopy
 from copy import copy
-
+@profile
 def motifcompetesim_trial(motiflist,max_strand_nr,maxStrandLength,numCells,numRounds,elong,biaslist):
 
 	population = Population([],motiflist,'empty','empty','empty')
@@ -13,15 +13,15 @@ def motifcompetesim_trial(motiflist,max_strand_nr,maxStrandLength,numCells,numRo
 	# counter lists
 	nr_motifs = []
 	nr_cells_with_motif = []
-	for it in range(len(motiflist)):
+	for iterator in xrange(len(motiflist)):
 		nr_motifs.append([])
 		nr_cells_with_motif.append([])
 	nr_strands_used = []
 	population_tracker = []
 	elongation_tracker = []
 
-	for time in range(numRounds):
-		for cell_iterator in range(numCells):
+	for time in xrange(numRounds):
+		for cell_iterator in xrange(numCells):
 			population.cells[cell_iterator].grow(elong,biaslist,maxStrandLength)
 
 		cell_to_divide = rand.sample(range(numCells),1)[0]
@@ -33,7 +33,7 @@ def motifcompetesim_trial(motiflist,max_strand_nr,maxStrandLength,numCells,numRo
 
 		population.update_counters()
 
-		for index in range(len(motiflist)):
+		for index in xrange(len(motiflist)):
 			nr_motifs[index].append(copy(population.nr_motifs[index]))
 			nr_cells_with_motif[index].append(copy(population.nr_cells_with_motif[index]))
 		nr_strands_used.append(copy(population.nr_strands))

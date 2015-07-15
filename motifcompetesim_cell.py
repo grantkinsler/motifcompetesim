@@ -14,7 +14,7 @@ class Cell:
 
 	def check_for_motif(self):
 		checked_list = []
-		for index in range(len(self.motiflist)):
+		for index in xrange(len(self.motiflist)):
 			if self.nr_motifs[index] > 0:
 				checked_list.append(True)
 			else:
@@ -24,7 +24,7 @@ class Cell:
 	def motif_count(self):
 		motif_count = [0] * len(self.motiflist)
 		for strand_iterator in range(self.nr_strands()):
-			for index in range(len(self.motiflist)):
+			for index in xrange(len(self.motiflist)):
 				if str(self.motiflist[index]) in self.strands[strand_iterator]:
 					motif_count[index] += 1
 		return motif_count
@@ -72,9 +72,9 @@ class Cell:
 					else:
 						self.strands[strand_iterator] = self.strands[strand_iterator] + "1"
 						self.elongations[strand_iterator] = self.elongations[strand_iterator] + "-"
-		for empty_iterator in range(self.max_strand_nr-self.nr_strands()):
+		for empty_iterator in xrange(self.max_strand_nr-self.nr_strands()):
 			if rand.uniform(0,1) < elong:
-				for index in range(len(self.motiflist)):
+				for index in xrange(len(self.motiflist)):
 					indexvalue = self.nr_motifs.pop(index)
 					if indexvalue > max(self.nr_motifs): # it is uniquely the maximum number
 						self.nr_motifs.insert(index,indexvalue)
@@ -101,7 +101,7 @@ class Cell:
 	def divide(self):
 		new_cell = Cell([],[],self.motiflist,self.max_strand_nr,'empty','empty','empty')
 		strand_counter = 0
-		for strand_number in range(self.nr_strands()):
+		for strand_number in xrange(self.nr_strands()):
 			if rand.uniform(0,1) < 0.5:
 				new_cell.strands.append(self.strands.pop(strand_counter)) # this strand is removed from cell and added to new cell
 				new_cell.elongations.append(self.elongations.pop(strand_counter)) # this strand is removed from cell and added to new cell

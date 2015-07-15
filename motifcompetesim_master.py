@@ -9,7 +9,7 @@ from motifcompetesim_elongdataoutput import motifcompetesim_elongdataoutput
 def usage():
 	print "Running a Motif Simulation using the parameters designated by options\n"
 	print "PARAMETERS:"
-	print "--trials, --maxStrands, --maxStrandLength, --numCells, --numRounds, --motiflist, --elong, --biaslist\n"
+	print "--trials, --maxStrands, --maxStrandLength, --numCells, --numRounds, --motiflist, --elong, --biaslist, --elongdata\n"
 	print "motiflist and biaslist must be the same length, where jth motif corresponds with the jth bias"
 	print "Outputs three csv files:\n"
 	print "1. 'MotifData' designates the csv file containing primarily motif data. First row is parameters."
@@ -19,12 +19,14 @@ def usage():
 	print "The first numCells rows are the cells after the first round.\n"
 	print "3. 'AllStrandData' designates a csv file where the first row is a list of all possible strands in the simulation."
 	print "The rows beneath correspond chronologically with time, first with all mean data and then with stdev data (mean1, mean2, ..., stdev1, stdev2, ...) "
+	print "4. 'ElongData' designates a csv file where the first row is a list of the possible elongation patterns, the next row is the same as beginning of 'AllStrandData'"
+	print "The rows beneath correspond chronologically with time and the elongationpattern, first with all mean data and then with stdev data (mean1-,mean1+,mean1--, ..., mean2-, ..., stdev1-,... stdev2-, ...) "
 
-
+@profile
 def main(argv):
 
 	try:
-		opts, args = getopt.getopt(argv, "h", ["help","testprefix=","trials=","maxStrands=","maxStrandLength=","numCells=","numRounds=","motiflist=","elong=","biaslist="])
+		opts, args = getopt.getopt(argv, "h", ["help","testprefix=","trials=","maxStrands=","maxStrandLength=","numCells=","numRounds=","motiflist=","elong=","biaslist=","elongdata="])
 	except getopt.GetoptError, error:
 		sys.stderr.write(str(error)+"\n")
 		usage()
@@ -60,6 +62,8 @@ def main(argv):
 				head,sep,tail = tail.partition(',')
 				biaslist.append(head)
 			biaslist = [float(bias) for bias in biaslist]
+		elif opt == '--elongdata' :
+			elongdata = arg
 		else:
 			sys.stderr.write("Unknown option %s\n" %opt)
 			usage()
@@ -80,7 +84,13 @@ def main(argv):
 
 	strand_number_dict = motifcompetesim_allstrandoutput(parameterlist,masterprefix,testprefix,pop_tracker,nr_strands_per_time,trials,max_strand_nr,maxStrandLength,numCells,numRounds,motiflist,elong,biaslist)
 
-	motifcompetesim_elongdataoutput(parameterlist,masterprefix,testprefix,pop_tracker,nr_strands_per_time,elongation_tracker,strand_number_dict,trials,max_strand_nr,maxStrandLength,numCells,numRounds,motiflist,elong,biaslist)
+	try:
+		elongdata
+	except:
+		elongdata =  'False'
+
+	if elongdata == 'True':
+		motifcompetesim_elongdataoutput(parameterlist,masterprefix,testprefix,pop_tracker,nr_strands_per_time,elongation_tracker,strand_number_dict,trials,max_strand_nr,maxStrandLength,numCells,numRounds,motiflist,elong,biaslist)
 
 
 
