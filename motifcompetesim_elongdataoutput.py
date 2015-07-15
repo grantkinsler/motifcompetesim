@@ -47,7 +47,7 @@ def makeKeyorder(maxstrandlen,motiflist): # create the keyorder for the order of
 				elongkeyorder.append(mod_key)
 
 	return keyorder, elongkeyorder
-@profile
+
 def motifcompetesim_elongdataoutput(parameterlist,masterprefix,testprefix,pop_tracker,nr_strands_per_time,elongation_tracker,strand_number_dict,trials,max_strand_nr,maxStrandLength,numCells,numRounds,motiflist,elong,biaslist):
 
 	keyorder, elongkeyorder = makeKeyorder(maxStrandLength,motiflist)

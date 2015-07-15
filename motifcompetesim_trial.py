@@ -3,7 +3,7 @@ from motifcompetesim_population import Population
 import random as rand
 from copy import deepcopy
 from copy import copy
-@profile
+
 def motifcompetesim_trial(motiflist,max_strand_nr,maxStrandLength,numCells,numRounds,elong,biaslist):
 
 	population = Population([],motiflist,'empty','empty','empty')

@@ -22,7 +22,6 @@ def usage():
 	print "4. 'ElongData' designates a csv file where the first row is a list of the possible elongation patterns, the next row is the same as beginning of 'AllStrandData'"
 	print "The rows beneath correspond chronologically with time and the elongationpattern, first with all mean data and then with stdev data (mean1-,mean1+,mean1--, ..., mean2-, ..., stdev1-,... stdev2-, ...) "
 
-@profile
 def main(argv):
 
 	try:

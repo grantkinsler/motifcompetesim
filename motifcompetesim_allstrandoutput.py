@@ -37,7 +37,7 @@ def makeKeyorder(maxstrandlen): # create the keyorder for the order of our dicti
 				keyorder.append(mod_key)
 
 	return keyorder
-@profile
+
 def motifcompetesim_allstrandoutput(parameterlist,masterprefix,testprefix,pop_tracker,nr_strands_per_time,trials,max_strand_nr,maxStrandLength,numCells,numRounds,motiflist,elong,biaslist):
 
 	keyorder = makeKeyorder(maxStrandLength)

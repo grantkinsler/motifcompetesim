@@ -1,6 +1,6 @@
 
 import csv
-@profile
+
 def motifcompetesim_fulltrialoutput(parameterlist,masterprefix,testprefix,trial_population_data,trial_elongation_data,trials,max_strand_nr,maxStrandLength,numCells,numRounds,motiflist,elong,biaslist):
 
 	with open(masterprefix + testprefix +'_FullTrial1Data_motif{motif}_len{maxStrandLength}_bias{bias}_elong{elong}_{trials}trials_numRound{numRounds}.csv'.format(motif = '|'.join([repr(motif) for motif in motiflist]), maxStrandLength = maxStrandLength, bias= '|'.join([str(bias) for bias in biaslist]), elong=elong, trials=trials, numRounds=numRounds), 'wb') as f:

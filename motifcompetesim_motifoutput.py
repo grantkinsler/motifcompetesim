@@ -8,7 +8,7 @@ def flatten(items, seqtypes=(list, tuple)): # used for flattening lists
         while isinstance(items[i], seqtypes):
             items[i:i+1] = items[i]
     return items
-@profile
+
 def motifcompetesim_motifoutput(parameterlist,masterprefix,testprefix,trials,max_strand_nr,maxStrandLength,numCells,numRounds,motiflist,elong,biaslist):
 	pop_tracker = []
 	elongation_tracker = []
